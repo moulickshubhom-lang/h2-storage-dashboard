@@ -6,7 +6,7 @@ gas, cryogenic liquid, chemical carriers (ammonia, LOHC), metal hydrides
 economic parameters that actually determine where each one makes sense,
 benchmarked against the US DOE onboard storage targets.
 
-**[Live demo](#)** — replace with your GitHub Pages link after deploying (see below).
+https://moulickshubhom-lang.github.io/h2-storage-dashboard/
 
 ## Why this exists
 
