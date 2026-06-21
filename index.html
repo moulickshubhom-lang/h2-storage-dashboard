@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hydrogen Storage Technology Comparator</title>
+  <meta name="description" content="An interactive comparison of hydrogen storage technologies by gravimetric capacity, volumetric density, operating conditions, TRL and indicative cost, benchmarked against US DOE storage targets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Hydrogen storage / process engineering portfolio project</p>
+    <h1>Hydrogen Storage Technology Comparator</h1>
+    <p class="lede">
+      Nine hydrogen storage routes — compressed gas, cryogenic liquid, chemical
+      carriers, metal hydrides and bulk geological storage — compared on the
+      physics that actually governs their footprint and cost, benchmarked
+      against the US DOE onboard storage targets.
+    </p>
+
+    <div class="basis-note">
+      <strong>Read this before comparing numbers:</strong> gravimetric capacity is
+      reported on a <em>system</em> basis (gas + tank/cryostat) for compressed and
+      liquid hydrogen, since hydrogen has no carrier material of its own — but on
+      a <em>neat carrier</em> basis (excluding tank/reactor) for chemical carriers
+      and metal hydrides. Mixing these two bases is the most common mistake in
+      casual storage comparisons. See the "Details" column in the table for the
+      exact basis used for each value, with sources.
+    </div>
+
+    <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+
+    <div class="panel">
+      <p class="panel-title">Gravimetric vs. volumetric density <span class="n">— marker size = TRL</span></p>
+      <div id="chart"></div>
+      <p class="legend-note">Geological/bulk storage is omitted from this chart since it has no per-kg packaged density — see the table below.</p>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="name">Technology <span class="arrow">↕</span></th>
+            <th class="num" data-key="gravimetric_wt_pct">Gravimetric <span class="arrow">↕</span></th>
+            <th class="num" data-key="volumetric_kg_per_m3">Volumetric <span class="arrow">↕</span></th>
+            <th class="col-hide-mobile">Operating conditions</th>
+            <th class="num" data-key="trl">TRL <span class="arrow">↕</span></th>
+            <th data-key="cost_tier">Cost tier <span class="arrow">↕</span></th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+
+    <footer>
+      <span>Data compiled from DOE program records, peer-reviewed literature and published TEA studies — see per-row sources in the table.</span>
+      <span>Built as a process engineering portfolio project · MIT licensed</span>
+    </footer>
+  </div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

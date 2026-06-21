@@ -1,0 +1,313 @@
+/* ==========================================================================
+   Hydrogen Storage Technology Comparator
+   Visual direction: engineering blueprint / datasheet, not a generic SaaS
+   dashboard. Grid paper background, mono numerals, two functional accents:
+   cyan for physical metrics, amber for cost/economic metrics.
+   ========================================================================== */
+
+:root {
+  --bp-bg: #0b1e2d;
+  --bp-panel: #122b3d;
+  --bp-panel-raised: #16344a;
+  --bp-line: rgba(184, 211, 226, 0.14);
+  --bp-text: #edf3f6;
+  --bp-text-muted: #7e97a6;
+  --bp-cyan: #5ec8e0;
+  --bp-cyan-dim: rgba(94, 200, 224, 0.18);
+  --bp-amber: #e8a33d;
+  --bp-amber-dim: rgba(232, 163, 61, 0.16);
+  --bp-good: #7fd99a;
+  --font-display: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html, body {
+  margin: 0;
+  background: var(--bp-bg);
+  color: var(--bp-text);
+  font-family: var(--font-body);
+  background-image:
+    linear-gradient(var(--bp-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+a {
+  color: var(--bp-cyan);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+}
+
+/* ---------- header ---------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bp-cyan);
+  margin: 0 0 10px;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.08;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--bp-text-muted);
+  max-width: 640px;
+  margin: 0 0 28px;
+}
+
+.basis-note {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--bp-text-muted);
+  background: var(--bp-panel);
+  border: 1px solid var(--bp-line);
+  border-left: 3px solid var(--bp-amber);
+  padding: 12px 16px;
+  margin: 0 0 32px;
+  max-width: 760px;
+}
+.basis-note strong {
+  color: var(--bp-text);
+}
+
+/* ---------- filter chips ---------- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  padding: 7px 13px;
+  border: 1px solid var(--bp-line);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--bp-text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.chip:hover {
+  border-color: var(--bp-cyan);
+  color: var(--bp-text);
+}
+.chip.active {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--bp-cyan);
+  color: var(--bp-cyan);
+}
+
+/* ---------- chart panel ---------- */
+
+.panel {
+  background: var(--bp-panel);
+  border: 1px solid var(--bp-line);
+  border-radius: 4px;
+  padding: 18px 18px 8px;
+  margin-bottom: 28px;
+}
+
+.panel-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-text-muted);
+  margin: 0 0 4px;
+}
+
+.panel-title .n {
+  color: var(--bp-cyan);
+}
+
+#chart {
+  width: 100%;
+  height: 480px;
+}
+
+.legend-note {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--bp-text-muted);
+  padding: 6px 4px 12px;
+}
+
+/* ---------- table ---------- */
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--bp-line);
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  min-width: 760px;
+}
+
+thead th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bp-text-muted);
+  padding: 12px 14px;
+  background: var(--bp-panel-raised);
+  border-bottom: 1px solid var(--bp-line);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+thead th:hover {
+  color: var(--bp-cyan);
+}
+thead th .arrow {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0.5;
+}
+thead th.sorted .arrow {
+  opacity: 1;
+  color: var(--bp-cyan);
+}
+
+tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--bp-line);
+  vertical-align: top;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+td.num, th.num {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+
+.tech-name {
+  font-weight: 600;
+}
+.tech-cat {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--bp-text-muted);
+  margin-top: 2px;
+}
+
+.na {
+  color: var(--bp-text-muted);
+  font-family: var(--font-mono);
+}
+
+.cost-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--bp-amber-dim);
+  color: var(--bp-amber);
+  white-space: nowrap;
+}
+
+.source-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--bp-text-muted);
+  background: none;
+  border: 1px solid var(--bp-line);
+  border-radius: 3px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.source-btn:hover {
+  color: var(--bp-cyan);
+  border-color: var(--bp-cyan);
+}
+
+.detail-row td {
+  background: var(--bp-panel);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--bp-text-muted);
+  line-height: 1.6;
+}
+.detail-row.hidden {
+  display: none;
+}
+.detail-row strong {
+  color: var(--bp-text);
+}
+
+/* ---------- footer ---------- */
+
+footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--bp-line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--bp-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ---------- focus visibility ---------- */
+
+a:focus-visible,
+button:focus-visible,
+th:focus-visible {
+  outline: 2px solid var(--bp-cyan);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  #chart { height: 380px; }
+  .col-hide-mobile { display: none; }
+}
